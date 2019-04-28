@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Hackathon.Models.Vagas>
+
+@{
+    ViewData["Title"] = "ClienteIndex";
+}
+
+<div class="input-field col s6">
+    <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+    <label for="first_name">Buscar estacionamento na região</label>
+</div>
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card">
+                <div class="display-flex">
+                    <img src="~/lib/imagens/imagem.png">
+                    <div class="card-content white-text">
+                        <h6>Local: @item.Local </h6>
+                        <h6>Avaliação: @item.Rate </h6>
+                        <h6>Distancia: @item.Distancia </h6>
+                    </div>
+                </div>
+                <div class="card-action">
+                    <a asp-action="ChegaAqui" class="btn">Reservar<i id="check" class="small material-icons">check</i></a>
+                    <a asp-action="ChegaAqui" class="btn">Detalhes<i id="detalhes" class="small material-icons">info</i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
