@@ -1,21 +1,26 @@
 ﻿@model IEnumerable<Hackathon.Models.Vagas>
 
-@{
+    @{
     ViewData["Title"] = "ClienteIndex";
-}
+    }
 
-<div class="input-field col s6">
-    <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-    <label for="first_name">Buscar estacionamento na região</label>
-</div>
+    <div class="input-field col s6">
+        @using (Html.BeginForm("ClienteIndex", "ChegaAqui", FormMethod.Get))
+        {
+        <div class="input-field col s6">
+            @Html.TextBox("Pesquisa", null, new { id = "pesquisa", placeholder = "Placeholder" })
+            <label for="pesquisa">Busca</label>
+        </div>
+        }
+    </div>
 
-@foreach (var item in Model)
-{
+    @foreach (var item in Model)
+    {
     <div class="row">
         <div class="col s12 m6">
             <div class="card">
                 <div class="display-flex">
-                    <img src="~/lib/imagens/imagem.png">
+                    <img src="~/lib/imagens/imagem.png" class="imagem ">
                     <div class="card-content white-text">
                         <h6>Local: @item.Local </h6>
                         <h6>Avaliação: @item.Rate </h6>
@@ -23,11 +28,11 @@
                     </div>
                 </div>
                 <div class="card-action">
-                    <a asp-action="ChegaAqui" class="btn">Reservar<i id="check" class="small material-icons">check</i></a>
-                    <a asp-action="ChegaAqui" class="btn">Detalhes<i id="detalhes" class="small material-icons">info</i></a>
+                    <a asp-action="ChegaAqui" class="btn grey lighten-1">Reservar<i id="check" class="small material-icons">check</i></a>
+                    <a asp-action="ChegaAqui" class="btn grey lighten-1">Detalhes<i id="detalhes" class="small material-icons">info</i></a>
                 </div>
             </div>
         </div>
     </div>
 
-}
+    }

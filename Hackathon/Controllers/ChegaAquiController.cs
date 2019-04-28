@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Hackathon.Controllers
 {
@@ -29,7 +30,12 @@ namespace Hackathon.Controllers
             return View();
         }
 
-        public IActionResult ClienteIndex()
+        public IActionResult GaragemIndex()
+        {
+            return View();
+        }
+
+        public IActionResult ClienteIndex(string pesquisa)
         {
             var lista = new List<Vagas>();
             lista.Add(new Vagas(Guid.NewGuid(), null, "Centro, R. Quinze de novembro", "200m", 5));
@@ -44,7 +50,10 @@ namespace Hackathon.Controllers
             lista.Add(new Vagas(Guid.NewGuid(), null, "Centro, R. Alameda Rio Branco", "400m", 3));
             lista.Add(new Vagas(Guid.NewGuid(), null, "Centro, R. R. Dr. Luiz de Freitas Melro", "500m", 4));
             lista.Add(new Vagas(Guid.NewGuid(), null, "Centro, R. Antônio da Veiga", "1,3km", 5));
-            return View(lista);
+            if (pesquisa == null)
+                return View(lista);
+            var listaFiltrada = lista.Where(x => x.Local.Contains(pesquisa)).ToList();
+            return View(listaFiltrada);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
